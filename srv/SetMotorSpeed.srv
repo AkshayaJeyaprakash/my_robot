@@ -1,0 +1,7 @@
+# Request to set the motor speed
+# Positive values for forward motion, negative for backward
+int8 speed
+
+---
+# Response indicating if the operation was successful
+bool success

@@ -1,0 +1,24 @@
+# right_wheel_controller:
+#   type: velocity_controllers/JointVelocityController
+#   joint: right_wheel_joint
+#   topic: right_wheel_speed
+
+# left_wheel_controller:
+#   type: velocity_controllers/JointVelocityController
+#   joint: left_wheel_joint
+#   topic: left_wheel_speed
+
+
+right_wheel_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: right_wheel_joint
+  topic: right_wheel_speed
+  hardware_interface: hardware_interface/VelocityJointInterface
+  pid: {p: 1.0, i: 0.0, d: 0.0}  # Adjust PID values as needed
+
+left_wheel_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: left_wheel_joint
+  topic: left_wheel_speed
+  hardware_interface: hardware_interface/VelocityJointInterface
+  pid: {p: 1.0, i: 0.0, d: 0.0}  # Adjust PID values as needed

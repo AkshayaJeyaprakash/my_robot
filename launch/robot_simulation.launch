@@ -1,0 +1,31 @@
+
+<launch>
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find my_robot)/urdf/c_robot.urdf.xacro" />
+
+    <!-- Load the joint states configuration -->
+    <rosparam file="$(find my_robot)/config/joint_states.yaml" command="load"/>
+
+    <!-- Load the differential drive configuration -->
+    <rosparam file="$(find my_robot)/config/diff_drive.yaml" command="load"/>
+
+    <!-- Launch Gazebo with your robot's world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find my_robot)/worlds/my_robot_world.world"/>
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+    </include>
+
+    <!-- Spawn robot model in Gazebo -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model my_robot"/>
+    
+    <!-- Start the wheel controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="right_wheel_controller left_wheel_controller" respawn="false" output="screen"/>
+
+
+    <!-- Run the robot_node -->
+    <node name="robot_node" pkg="my_robot" type="robot_node.py" output="screen"/>
+
+    <!-- Run the human_node -->
+    <node name="human_node" pkg="my_robot" type="human_node.py" output="screen"/>
+</launch>

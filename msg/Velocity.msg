@@ -1,0 +1,2 @@
+int8 linear_velocity
+int8 angular_velocity

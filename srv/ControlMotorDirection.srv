@@ -1,0 +1,7 @@
+# Request to control the motor direction
+# Positive values turn the robot right, negative values turn it left
+int8 direction
+
+---
+# Response indicating if the operation was successful
+bool success
